@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension + Backend",
+      "type": "extensionHost",
+      "request": "launch",
+      "preLaunchTask": "Run Backend Server",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/extension/asa-rootiq"
+      ]
+    },
+    {
+      "name": "Run Extension only (backend already running)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/extension/asa-rootiq"
+      ]
+    }
+  ]
+}

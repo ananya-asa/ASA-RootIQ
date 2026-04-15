@@ -1,0 +1,48 @@
+{
+  "name": "asa-rootiq",
+  "displayName": "ASA RootIQ",
+  "description": "AI Debugging Mentor for student developers",
+  "version": "0.0.1",
+  "publisher": "asa-rootiq",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:asa-rootiq.quickFix",
+    "onCommand:asa-rootiq.learnMode"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "asa-rootiq.quickFix",
+        "title": "⚡ Quick Fix",
+        "category": "ASA RootIQ"
+      },
+      {
+        "command": "asa-rootiq.learnMode",
+        "title": "🎓 Learn with ASA RootIQ",
+        "category": "ASA RootIQ"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.3"
+  },
+  "dependencies": {
+    "axios": "^1.15.0"
+  }
+}

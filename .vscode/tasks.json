@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Backend Server",
+      "type": "shell",
+      "command": "node",
+      "args": ["${workspaceFolder}/backend/index.js"],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "asa-rootiq-backend",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "ASA RootIQ backend running on port"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Run Extension (Debug)",
+      "type": "shell",
+      "command": "code",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/extension/asa-rootiq"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Run Both Backend & Extension",
+      "dependsOn": ["Run Backend Server", "Run Extension (Debug)"],
+      "problemMatcher": []
+    }
+  ]
+}

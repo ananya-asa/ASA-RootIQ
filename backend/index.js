@@ -1,6 +1,7 @@
+const path = require('path');
 const express=require('express');  //for creating a web server
-const cors=require('cors');        //for cross-origin resource sharing   
-require('dotenv').config();       //for environment variables
+const cors=require('cors');        //for cross-origin resource sharing
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const {GoogleGenerativeAI}=require('@google/generative-ai');
 
 

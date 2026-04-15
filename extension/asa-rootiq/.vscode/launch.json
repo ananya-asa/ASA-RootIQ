@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension (workspace = asa-rootiq folder)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ]
+    },
+    {
+      "name": "Run Extension (workspace = ASA-RootIQ repo root)",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/extension/asa-rootiq"
+      ]
+    }
+  ]
+}
