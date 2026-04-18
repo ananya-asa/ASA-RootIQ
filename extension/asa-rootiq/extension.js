@@ -16,12 +16,11 @@ function activate(context) {
 
 		const code = editor.document.getText(editor.selection) || editor.document.getText();
 
-		const error = await vscode.window.showInputBox({
-			prompt: '⚡ Paste your error message here',
-			placeHolder: 'e.g. NameError: name x is not defined'
-		});
-
-		if (!error) return;
+		const error = await getErrorFromFile(editor);
+if (!error) {
+    vscode.window.showWarningMessage('No errors detected! Write some buggy code first 😄');
+    return;
+}
 
 		vscode.window.showInformationMessage('⚡ ASA RootIQ is analyzing...');
 
@@ -33,11 +32,30 @@ function activate(context) {
 			});
 
 			const analysis = response.data.analysis;
-			const lines = analysis.split('\n').slice(0, 6).join('\n');
+			const problemMatch = analysis.match(/PROBLEM:\s*(.+)/i);
+      const fixMatch = analysis.match(/FIX:\s*([\s\S]*?)$/i);
 
-			vscode.window.showInformationMessage(`⚡ Quick Fix:\n${lines}`, { modal: true });
+      const problem=problemMatch ? problemMatch[1].trim() : 'NO Problem Found';
+      const fixedCode=fixMatch ? fixMatch[1].trim() : null;
 
-		} catch (err) {
+      const action=await vscode.window.showInformationMessage(
+        `⚡ ${error}\n${problem}`,
+        { modal: true },
+        'Apply Fix',
+        'Cancel'
+      )
+      if(action==='Apply Fix' && fixedCode){
+        const edit=new vscode.WorkspaceEdit();
+        const fullRange=new vscode.Range(
+          editor.document.positionAt(0),
+          editor.document.positionAt(editor.document.getText().length)
+        );
+
+        edit.replace(editor.document.uri,fullRange,fixedCode);
+        await vscode.workspace.applyEdit(edit);
+        vscode.window.showInformationMessage('Fix applied successfully!');
+      }
+    } catch (err) {
 			vscode.window.showErrorMessage('Backend not running! Start with node index.js');
 		}
 	});
@@ -53,13 +71,11 @@ function activate(context) {
 
 		const code = editor.document.getText(editor.selection) || editor.document.getText();
 
-		const error = await vscode.window.showInputBox({
-			prompt: '🎓 Paste your error message here',
-			placeHolder: 'e.g. NameError: name x is not defined'
-		});
-
-		if (!error) return;
-
+		const error = await getErrorFromFile(editor);
+if (!error) {
+    vscode.window.showWarningMessage('No errors detected! Write some buggy code first 😄');
+    return;
+}
 		// Create webview panel
 		const panel = vscode.window.createWebviewPanel(
 			'asaRootIQ',
@@ -273,6 +289,21 @@ function parseAnalysis(analysis) {
 	if (quizMatch) sections.quiz = quizMatch[1].trim();
 
 	return sections;
+}
+
+async function getErrorFromFile(editor) {
+  const uri = editor.document.uri;
+  const diagnostics = vscode.languages.getDiagnostics(uri);
+  
+  if (diagnostics.length === 0) return null;
+  
+  // Get the most severe error first
+  const errors = diagnostics.filter(d => d.severity === vscode.DiagnosticSeverity.Error);
+  const warnings = diagnostics.filter(d => d.severity === vscode.DiagnosticSeverity.Warning);
+  
+  const target = errors.length > 0 ? errors[0] : warnings[0];
+  
+  return `Line ${target.range.start.line + 1}: ${target.message}`;
 }
 
 function deactivate() {}
