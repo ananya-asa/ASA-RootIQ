@@ -3,6 +3,17 @@ const express=require('express');  //for creating a web server
 const cors=require('cors');        //for cross-origin resource sharing
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 const {GoogleGenerativeAI}=require('@google/generative-ai');
+const admin=require("firebase-admin")
+const serviceAccount=require("./serviceAccount.json");
+const { error } = require('console');
+
+
+admin.initializeApp({
+  credential:admin.credential.cert(serviceAccount)
+});
+
+const db=admin.firestore();
+
 
 
 const app=express();
@@ -39,12 +50,23 @@ Be clear, friendly and educational. Talk like a mentor, not a robot.`;
         const result=await model.generateContent(prompt);
         const response=result.response.text();
         res.json({success:true,analysis:response});
+
+        await db.collection('sessions').add({
+          code,
+          error,
+          mode,
+          analysis:response,
+          timestamp: admin.firestore.FieldValue.serverTimestamp()
+        
+        });
       }
       catch(err){
         res.status(500).json({ success: false, error: err.message });
       }
       
 });
+
+
 
 app.get("/",(req,res)=>{
     res.json({ message: 'ASA RootIQ Backend is running! 🚀' });
