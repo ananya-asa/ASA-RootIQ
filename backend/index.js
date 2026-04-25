@@ -125,6 +125,12 @@ FIX: (corrected code only, no explanation)`
     - CSS keyframes + transitions for all animations
     - JS setTimeout and event listeners for sequencing
     - No external libraries at all
+
+    ⚠️ BUTTON COMPATIBILITY:
+- All buttons must have cursor: pointer in CSS
+- Buttons must have z-index: 999
+- Never place divs over buttons that block clicks
+- Test that all buttons are fully clickable
     
     🏁 Return ONLY the complete working HTML file starting with <!DOCTYPE html>`;
 
