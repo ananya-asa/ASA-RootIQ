@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const admin = require("firebase-admin");
-const serviceAccount = require("./serviceAccount.json");
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
