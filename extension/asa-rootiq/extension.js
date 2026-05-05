@@ -1,7 +1,7 @@
 const vscode = require('vscode');
 const axios = require('axios');
 
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://asa-rootiq.onrender.com';
 
 function activate(context) {
 
