@@ -5,7 +5,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const admin = require("firebase-admin");
 
-const admin = require("firebase-admin");
+
 
 admin.initializeApp({
   credential: admin.credential.cert({
