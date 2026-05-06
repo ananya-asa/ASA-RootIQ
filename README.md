@@ -180,21 +180,10 @@ npm start
 - [ ] Campus/cohort analytics for faculty
 - [ ] Collaborative debugging sessions
 
----
-
-## 🎯 GDG Solution Challenge 2026
-
-**Theme:** Open Innovation — Smart Resource Allocation
-
-**SDGs:** SDG 4 (Quality Education) + SDG 8 (Decent Work & Economic Growth)
-
-**Impact:** Democratizing high-quality debugging mentorship for Indian student developers — regardless of college tier or background.
-
----
 
 ## 👩‍💻 Built By
 
-**Ananya** — CS Engineering Student, SJEC Mangaluru  
+**Ananya ASA** — CS Engineering Student, SJEC Mangaluru  
 
 
 *Built with 💜 and a lot of debugging*
