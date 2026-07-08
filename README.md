@@ -68,6 +68,14 @@ ASA RootIQ is a **VS Code extension + web dashboard** that:
 
 ---
 
+## 📷 Screenshots
+
+<img width="1806" height="1157" alt="Screenshot 2026-04-23 120623" src="https://github.com/user-attachments/assets/5db6a4df-2caa-4692-9a6c-b1a31ecf7a88" />
+
+<img width="1061" height="901" alt="Screenshot 2026-04-23 123654" src="https://github.com/user-attachments/assets/5d705b2e-0371-4c2c-b2c6-c9402189cd75" />
+
+<img width="872" height="1141" alt="Screenshot 2026-04-25 183208" src="https://github.com/user-attachments/assets/28b682b4-9918-47c3-9646-ff6c0a05b4e2" />
+
 ## 🏗️ Architecture
 
 ```
